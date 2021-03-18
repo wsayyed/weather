@@ -15,7 +15,7 @@ export default function Home() {
       );
       setIsloading(false);
       setWdata(data);
-      console.log("data => ", data);
+      console.log("data FROM TEST=> ", data);
     } catch (error) {
       setIsloading(false);
       setWerr(error.response.data.message);
