@@ -19,7 +19,7 @@ export default function Home() {
     } catch (error) {
       setIsloading(false);
       setWerr(error.response.data.message);
-      console.log(error.response.data.message);
+      console.log("Feature Err -> ",error.response.data.message);
     }
   };
 
