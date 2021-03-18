@@ -15,7 +15,7 @@ export default function Home() {
       );
       setIsloading(false);
       setWdata(data);
-      console.log("data FROM TEST=> ", data);
+      console.log("data from feature branch test=> ", data);
     } catch (error) {
       setIsloading(false);
       setWerr(error.response.data.message);
