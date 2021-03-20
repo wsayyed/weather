@@ -1,7 +1,10 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
+
   const [ucity, setUcity] = useState("");
   const [isloading, setIsloading] = useState(false);
   const [wdata, setWdata] = useState({});
@@ -11,15 +14,16 @@ export default function Home() {
     try {
       setIsloading(true);
       const data = await axios.get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${ucity}&appid=429736441cf3572838aa10530929f7cd`
+        `http://api.openweathermap.org/data/2.5/weather?q=${ucity}&appid=429736441cf3572838aa10530929f7cd&units=metric`
       );
       setIsloading(false);
       setWdata(data);
-      console.log("data FROM TEST=> ", data);
+      console.log("data from feature branch test=> ", data);
+      await sessionStorage.setItem("weather_data", JSON.stringify(data));
+      router.push({ pathname: "/home" });
     } catch (error) {
       setIsloading(false);
       setWerr(error.response.data.message);
-      console.log(error.response.data.message);
     }
   };
 
@@ -35,10 +39,10 @@ export default function Home() {
                 </p>
                 {werr != "" ? (
                   <div
-                    class="mb-2 text-sm md:text-md bg-red-200 border-red-600 text-red-600 border-l-4 px-3 py-2"
+                    className="mb-2 text-sm md:text-md bg-red-200 border-red-600 text-red-600 border-l-4 px-3 py-2"
                     role="alert"
                   >
-                    <p class="font-bold">Info</p>
+                    <p className="font-bold">Info</p>
                     <p>{werr}</p>
                   </div>
                 ) : null}
@@ -67,7 +71,7 @@ export default function Home() {
                         width="20"
                         height="20"
                         fill="currentColor"
-                        class="mr-2 animate-spin"
+                        className="mr-2 animate-spin"
                         viewBox="0 0 1792 1792"
                         xmlns="http://www.w3.org/2000/svg"
                       >
